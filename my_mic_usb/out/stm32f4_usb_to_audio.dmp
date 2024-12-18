@@ -1,0 +1,489 @@
+
+out/stm32f4_usb_to_audio.elf:     file format elf32-littlearm
+out/stm32f4_usb_to_audio.elf
+architecture: armv7e-m, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x08001919
+
+Program Header:
+    LOAD off    0x00010000 vaddr 0x08000000 paddr 0x08000000 align 2**16
+         filesz 0x0000575c memsz 0x0000575c flags r-x
+    LOAD off    0x00020000 vaddr 0x20000000 paddr 0x0800575c align 2**16
+         filesz 0x00000468 memsz 0x00000468 flags rw-
+    LOAD off    0x00000468 vaddr 0x20000468 paddr 0x20000468 align 2**16
+         filesz 0x00000000 memsz 0x00000ff4 flags rw-
+private flags = 0x5000400: [Version5 EABI] [hard-float ABI]
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   00000188  08000000  08000000  00010000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         00005550  08000188  08000188  00010188  2**3
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00000084  080056d8  080056d8  000156d8  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .data         00000468  20000000  0800575c  00020000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .ccmram       00000000  10000000  10000000  00020468  2**0
+                  CONTENTS
+  5 .bss          000009f4  20000468  20000468  00020468  2**2
+                  ALLOC
+  6 ._user_heap_stack 00000600  20000e5c  20000e5c  00020468  2**0
+                  ALLOC
+  7 .ARM.attributes 00000030  00000000  00000000  00020468  2**0
+                  CONTENTS, READONLY
+  8 .debug_line   0000fbf6  00000000  00000000  00020498  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  9 .debug_info   00017cd1  00000000  00000000  0003008e  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 10 .debug_abbrev 000040e4  00000000  00000000  00047d5f  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 11 .debug_aranges 00000c00  00000000  00000000  0004be48  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 12 .debug_str    00062119  00000000  00000000  0004ca48  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 13 .debug_ranges 000011b8  00000000  00000000  000aeb68  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 14 .debug_loc    00008d9d  00000000  00000000  000afd20  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 15 .debug_macro  00012d2d  00000000  00000000  000b8abd  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 16 .comment      0000026c  00000000  00000000  000cb7ea  2**0
+                  CONTENTS, READONLY
+ 17 .iar.rtmodel  00000015  00000000  00000000  000cba56  2**0
+                  CONTENTS, READONLY
+ 18 .iar_vfe_header 00000004  00000000  00000000  000cba6c  2**2
+                  CONTENTS, READONLY
+ 19 .debug_frame  00002074  00000000  00000000  000cba70  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+SYMBOL TABLE:
+08000000 l    d  .isr_vector	00000000 .isr_vector
+08000188 l    d  .text	00000000 .text
+080056d8 l    d  .rodata	00000000 .rodata
+20000000 l    d  .data	00000000 .data
+10000000 l    d  .ccmram	00000000 .ccmram
+20000468 l    d  .bss	00000000 .bss
+20000e5c l    d  ._user_heap_stack	00000000 ._user_heap_stack
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .iar.rtmodel	00000000 .iar.rtmodel
+00000000 l    d  .iar_vfe_header	00000000 .iar_vfe_header
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    df *ABS*	00000000 startup_stm32f4xx.o
+08001924 l       .text	00000000 LoopCopyDataInit
+0800191c l       .text	00000000 CopyDataInit
+08001938 l       .text	00000000 LoopFillZerobss
+08001932 l       .text	00000000 FillZerobss
+0800195c l       .text	00000000 Infinite_Loop
+00000000 l    df *ABS*	00000000 C:\Documents and Settings\luca spelgatti\Desktop\OLD_PC\Mic_F4\PDMLib\src\pdm_filter.c
+00000000 l       *ABS*	00000000 __iar_systems$$module
+0800027c l       .text	00000000 .text_4
+0800056a l       .text	00000000 .text_5
+08000858 l       .text	00000000 .text_6
+08000b4a l       .text	00000000 .text_7
+08000ebc l       .text	00000000 .text_8
+08000ec0 l       .text	00000000 .text_9
+08000ec4 l       .text	00000000 .text_10
+08000ec8 l       .text	00000000 .text_11
+08000ecc l       .text	00000000 .text_12
+08000ed0 l       .text	00000000 .text_13
+08000ed4 l       .text	00000000 .text_14
+00000000 l    df *ABS*	00000000 _arm_mulsf3.o
+00000000 l    df *ABS*	00000000 _arm_addsubdf3.o
+00000000 l    df *ABS*	00000000 _arm_muldivdf3.o
+00000000 l    df *ABS*	00000000 _arm_fixdfsi.o
+00000000 l    df *ABS*	00000000 _arm_cmpsf2.o
+00000000 l    df *ABS*	00000000 main.c
+00000000 l    df *ABS*	00000000 stm32f4xx_it.c
+00000000 l    df *ABS*	00000000 system_stm32f4xx.c
+00000000 l    df *ABS*	00000000 usb_bsp.c
+00000000 l    df *ABS*	00000000 usbd_desc.c
+00000000 l    df *ABS*	00000000 usbd_usr.c
+00000000 l    df *ABS*	00000000 waverecorder.c
+08001d28 l     F .text	00000184 WaveRecorderInit.part.0
+20000ae0 l     O .bss	00000004 AudioRecInited
+20000c18 l     O .bss	00000080 Mic_PDM_Buffer.0
+00000000 l    df *ABS*	00000000 usb_core.c
+00000000 l    df *ABS*	00000000 usb_dcd.c
+00000000 l    df *ABS*	00000000 usb_dcd_int.c
+00000000 l    df *ABS*	00000000 usbd_audio_core.c
+08003850 l     F .text	00000004 usbd_audio_DataOut
+08003854 l     F .text	0000000c USBD_audio_GetCfgDesc
+08003860 l     F .text	00000038 usbd_audio_DataIn
+08003898 l     F .text	0000000c usbd_audio_EP0_RxReady
+080038a4 l     F .text	000000e8 usbd_audio_Setup
+0800398c l     F .text	0000000c usbd_audio_DeInit
+08003998 l     F .text	00000010 usbd_audio_Init
+080039a8 l     F .text	00000024 usbd_audio_SOF
+20000d24 l     O .bss	00000004 PlayFlag
+20000d28 l     O .bss	00000004 usbd_audio_AltSet
+20000384 l     O .data	0000006d usbd_audio_CfgDesc
+00000000 l    df *ABS*	00000000 stm32f4_discovery.c
+00000000 l    df *ABS*	00000000 stm32f4_discovery_audio_codec.c
+08003ac8 l     F .text	00000084 Audio_MAL_IRQHandler.part.0
+08003b4c l     F .text	0000029c Codec_WriteRegister
+20000d7e l     O .bss	00000002 udata.0
+00000000 l    df *ABS*	00000000 usbd_core.c
+0800450c l     F .text	00000016 USBD_Resume
+08004524 l     F .text	0000001c USBD_Suspend
+08004540 l     F .text	00000010 USBD_SOF
+08004550 l     F .text	0000000e USBD_IsoINIncomplete
+08004560 l     F .text	0000000e USBD_IsoOUTIncomplete
+08004570 l     F .text	0000002e USBD_Reset
+080045a0 l     F .text	00000058 USBD_SetupStage
+080045f8 l     F .text	000000b4 USBD_DataInStage
+080046ac l     F .text	00000078 USBD_DataOutStage
+00000000 l    df *ABS*	00000000 usbd_ioreq.c
+00000000 l    df *ABS*	00000000 usbd_req.c
+20000e58 l     O .bss	00000001 cfgidx.0
+00000000 l    df *ABS*	00000000 misc.c
+00000000 l    df *ABS*	00000000 stm32f4xx_dac.c
+00000000 l    df *ABS*	00000000 stm32f4xx_dma.c
+00000000 l    df *ABS*	00000000 stm32f4xx_exti.c
+00000000 l    df *ABS*	00000000 stm32f4xx_gpio.c
+00000000 l    df *ABS*	00000000 stm32f4xx_i2c.c
+00000000 l    df *ABS*	00000000 stm32f4xx_rcc.c
+20000458 l     O .data	00000010 APBAHBPrescTable
+00000000 l    df *ABS*	00000000 stm32f4xx_spi.c
+00000000 l    df *ABS*	00000000 stm32f4xx_syscfg.c
+0800195c  w    F .text	00000002 RTC_Alarm_IRQHandler
+0800195c  w    F .text	00000002 HASH_RNG_IRQHandler
+20000304 g     O .data	00000012 USBD_DeviceDesc
+0800195c  w    F .text	00000002 EXTI2_IRQHandler
+08001c84 g     F .text	00000028 USBD_USR_ProductStrDescriptor
+080039cc g     F .text	00000040 STM_EVAL_LEDInit
+0800195c  w    F .text	00000002 TIM8_CC_IRQHandler
+20000408 g     O .data	00000004 AUDIO_MAL_DMA_CLOCK
+20000d7c g     O .bss	00000002 dac_play_size
+08002d60 g     F .text	00000010 USB_OTG_ReadDevOutEP_itr
+08001c4c g     F .text	00000002 USB_OTG_BSP_mDelay
+20000204 g     O .data	00000100 T2
+08001d24 g     F .text	00000002 USBD_USR_DeviceConnected
+08001a28 g     F .text	00000002 DebugMon_Handler
+08004f3c g     F .text	00000014 DMA_Cmd
+20000454 g     O .data	00000004 USBD_DCD_INT_fops
+080053c4 g     F .text	00000014 RCC_PLLI2SConfig
+08005160 g     F .text	00000026 GPIO_PinAFConfig
+2000040c g     O .data	00000004 AUDIO_MAL_DMA_DREG
+08002dbc g     F .text	000003f4 DCD_Init
+20000418 g     O .data	00000004 AUDIO_MAL_DMA_STREAM
+20000d34 g     O .bss	00000004 CurrentPos
+0800135c g     F .text	0000005a .hidden __floatdidf
+0800195c  w    F .text	00000002 TIM1_CC_IRQHandler
+08005360 g     F .text	00000006 I2C_ReceiveData
+08005668 g     F .text	00000004 SPI_I2S_SendData
+0800195c  w    F .text	00000002 DMA2_Stream5_IRQHandler
+08001a14 g     F .text	00000002 HardFault_Handler
+08003a58 g     F .text	00000070 STM_EVAL_PBInit
+0800195c  w    F .text	00000002 DMA1_Stream5_IRQHandler
+00000400 g       *ABS*	00000000 _Min_Stack_Size
+0800249c g     F .text	00000040 USB_OTG_FlushRxFifo
+08001a30 g     F .text	00000002 SysTick_Handler
+08004ccc g     F .text	00000070 NVIC_Init
+0800195c  w    F .text	00000002 PVD_IRQHandler
+0800195c  w    F .text	00000002 SDIO_IRQHandler
+0800195c  w    F .text	00000002 TAMP_STAMP_IRQHandler
+0800575c g       *ABS*	00000000 _sidata
+08003224 g     F .text	0000003a DCD_EP_Close
+20000cd8 g     O .bss	00000040 AudioCtl
+08001a2c g     F .text	00000002 PendSV_Handler
+08005504 g     F .text	0000006c SPI_I2S_DeInit
+08001a10 g     F .text	00000002 NMI_Handler
+0800575c g       .data	00000000 __exidx_end
+080031b0 g     F .text	00000072 DCD_EP_Open
+0800195c  w    F .text	00000002 CAN2_RX1_IRQHandler
+0800195c  w    F .text	00000002 EXTI3_IRQHandler
+20000d80 g     O .bss	00000004 SET_TEST_MODE
+08004820 g     F .text	000002cc USBD_StdDevReq
+0800195c  w    F .text	00000002 TIM8_TRG_COM_TIM14_IRQHandler
+08001cf0 g     F .text	0000001c USBD_USR_InterfaceStrDescriptor
+0800195c  w    F .text	00000002 TIM1_UP_TIM10_IRQHandler
+080056d8 g       .text	00000000 _etext
+20000468 g       .bss	00000000 _sbss
+20000e54 g     O .bss	00000004 USBD_ep_status
+08004ee0 g     F .text	0000005c DMA_Init
+0800195c  w    F .text	00000002 TIM8_UP_TIM13_IRQHandler
+20000338 g     O .data	0000001c USR_cb
+0800195c  w    F .text	00000002 I2C3_ER_IRQHandler
+200003f4 g     O .data	00000004 BUTTON_PORT
+08001d1c g     F .text	00000002 USBD_USR_DeviceSuspended
+08004048 g     F .text	00000288 Codec_Init
+08000858 g     F .text	000002f2 PDM_Filter_64_MSB
+08004b30 g     F .text	000000d8 USBD_StdEPReq
+08001904 g     F .text	00000012 .hidden __aeabi_fcmpgt
+080012e4 g     F .text	00000022 .hidden __floatsidf
+08001a34 g     F .text	00000010 EXTI0_IRQHandler
+0800195c  w    F .text	00000002 I2C2_EV_IRQHandler
+0800195c  w    F .text	00000002 DMA1_Stream2_IRQHandler
+20000000 g     O .data	00000004 stm32_crc
+0800195c  w    F .text	00000002 CAN1_RX0_IRQHandler
+20000d30 g     O .bss	00000004 AudioRemSize
+080047e0 g     F .text	0000001e USBD_CtlSendStatus
+0800195c  w    F .text	00000002 FPU_IRQHandler
+08004aec g     F .text	00000042 USBD_StdItfReq
+08004c08 g     F .text	0000003e USBD_ParseSetupRequest
+0800195c  w    F .text	00000002 OTG_HS_WKUP_IRQHandler
+0800339c g     F .text	000004b4 USBD_OTG_ISR_Handler
+08001a20 g     F .text	00000002 UsageFault_Handler
+08001834 g     F .text	00000066 .hidden __lesf2
+080054bc g     F .text	00000018 RCC_APB2PeriphClockCmd
+20000d2c g     O .bss	00000004 AUDIO_MAL_DMA_CHANNEL
+08001fc4 g     F .text	00000336 USB_OTG_SelectCore
+0800195c  w    F .text	00000002 CAN2_SCE_IRQHandler
+0800195c  w    F .text	00000002 DMA2_Stream2_IRQHandler
+20000d20 g     O .bss	00000001 AudioCtlUnit
+080050c0 g     F .text	00000094 GPIO_Init
+08003370 g     F .text	0000001a DCD_EP_Flush
+20000468 g       .bss	00000000 __bss_start__
+080024dc g     F .text	0000002e USB_OTG_SetCurrentMode
+080012c4 g     F .text	0000001e .hidden __aeabi_ui2d
+08005754 g     O .rodata	00000008 GPIO_PIN
+20000000 g       .data	00000000 _sdata
+0800195c  w    F .text	00000002 SPI1_IRQHandler
+08001040 g     F .text	00000000 .hidden __aeabi_drsub
+08002518 g     F .text	0000000a USB_OTG_ReadCoreItr
+08001d10 g     F .text	00000002 USBD_USR_DeviceReset
+08004778 g     F .text	0000000e USBD_ClrCfg
+0800195c  w    F .text	00000002 TIM6_DAC_IRQHandler
+0800195c  w    F .text	00000002 TIM1_BRK_TIM9_IRQHandler
+08004724 g     F .text	0000003a USBD_Init
+0800195c  w    F .text	00000002 DCMI_IRQHandler
+0800195c  w    F .text	00000002 CAN2_RX0_IRQHandler
+08001308 g     F .text	00000042 .hidden __extendsfdf2
+0800160c g     F .text	000001d0 .hidden __aeabi_ddiv
+080054a4 g     F .text	00000018 RCC_APB1PeriphClockCmd
+0800104c g     F .text	00000276 .hidden __adddf3
+0800183c g     F .text	0000005e .hidden __nesf2
+0800575c g       .data	00000000 __exidx_start
+080013b8 g     F .text	00000254 .hidden __aeabi_dmul
+0800195c  w    F .text	00000002 DMA2_Stream3_IRQHandler
+080047d0 g     F .text	00000010 USBD_CtlContinueRx
+0800548c g     F .text	00000018 RCC_AHB2PeriphClockCmd
+080056a0 g     F .text	0000000c SPI_I2S_GetFlagStatus
+0800535c g     F .text	00000004 I2C_SendData
+080012c4 g     F .text	0000001e .hidden __floatunsidf
+0800195c  w    F .text	00000002 USART6_IRQHandler
+0800564c g     F .text	0000001a I2S_Cmd
+08003de8 g     F .text	000000ec EVAL_AUDIO_Play
+080051f4 g     F .text	000000e0 I2C_Init
+08004f84 g     F .text	00000038 DMA_GetFlagStatus
+0800027c g     F .text	000002ee PDM_Filter_64_LSB
+0800195c  w    F .text	00000002 USART3_IRQHandler
+080050b4 g     F .text	0000000c EXTI_ClearITPendingBit
+0800195c  w    F .text	00000002 CRYP_IRQHandler
+20000e5c g       .bss	00000000 _ebss
+20000d78 g     O .bss	00000004 dac_play_ptr
+08002d70 g     F .text	0000000c USB_OTG_ReadDevAllInEPItr
+08001918  w    F .text	00000030 Reset_Handler
+08002cdc g     F .text	00000048 USB_OTG_EPSetStall
+0800195c  w    F .text	00000002 CAN1_RX1_IRQHandler
+080018f0 g     F .text	00000012 .hidden __aeabi_fcmpge
+080017dc g     F .text	0000004e .hidden __fixdfsi
+08001c68 g     F .text	0000001c USBD_USR_ManufacturerStrDescriptor
+08000b4a g     F .text	00000372 PDM_Filter_80_MSB
+0800195c  w    F .text	00000002 UART5_IRQHandler
+20000a5c g     O .bss	00000001 UserButtonPressed
+08001d20 g     F .text	00000002 USBD_USR_DeviceResumed
+0800195c  w    F .text	00000002 DMA2_Stream0_IRQHandler
+080047b4 g     F .text	0000001a USBD_CtlPrepareRx
+0800182c g     F .text	0000006e .hidden __gtsf2
+0800195c  w    F .text	00000002 TIM4_IRQHandler
+0800104c g     F .text	00000276 .hidden __aeabi_dadd
+20000cb8 g     O .bss	00000020 RecBuf1
+08005154 g     F .text	0000000a GPIO_WriteBit
+080018dc g     F .text	00000012 .hidden __aeabi_fcmple
+08001b9c g     F .text	0000008c USB_OTG_BSP_Init
+0800134c g     F .text	0000006a .hidden __aeabi_ul2d
+08001cac g     F .text	00000028 USBD_USR_SerialStrDescriptor
+080052f0 g     F .text	0000001a I2C_GenerateSTART
+08002be0 g     F .text	000000fa USB_OTG_EP0StartXfer
+08004800 g     F .text	0000001e USBD_CtlReceiveStatus
+20000d74 g     O .bss	00000001 OutputDev
+0800195c  w    F .text	00000002 I2C1_EV_IRQHandler
+0800195c  w    F .text	00000002 DMA1_Stream6_IRQHandler
+08001c48 g     F .text	00000002 USB_OTG_BSP_uDelay
+08002a7c g     F .text	00000164 USB_OTG_EPStartXfer
+20000004 g     O .data	00000100 T0
+080053e4 g     F .text	00000090 RCC_GetClocksFreq
+20000d1c g     O .bss	00000004 AudioCtlLen
+0800195c  w    F .text	00000002 DMA1_Stream1_IRQHandler
+08004c48 g     F .text	0000001c USBD_CtlError
+20000ae4 g     O .bss	00000034 Filter
+0800195c  w    F .text	00000002 UART4_IRQHandler
+20000354 g     O .data	00000001 buffer_ready
+20000e5c g       .bss	00000000 __bss_end__
+200003f8 g     O .data	00000010 GPIO_PORT
+0800195c  w    F .text	00000002 TIM3_IRQHandler
+20000b18 g     O .bss	00000080 Mic_DMA_PDM_Buffer0
+0800195c  w    F .text	00000002 RCC_IRQHandler
+08003330 g     F .text	0000003e DCD_EP_ClrStall
+0800195c  w    F .text	00000002 TIM8_BRK_TIM12_IRQHandler
+00000200 g       *ABS*	00000000 _Min_Heap_Size
+08001048 g     F .text	0000027a .hidden __aeabi_dsub
+0800195c g       .text	00000002 Default_Handler
+08001d18 g     F .text	00000002 USBD_USR_DeviceConfigured
+08005384 g     F .text	00000036 I2C_GetFlagStatus
+0800134c g     F .text	0000006a .hidden __floatundidf
+08001d0c g     F .text	00000002 USBD_USR_Init
+0800195c  w    F .text	00000002 EXTI15_10_IRQHandler
+08003a24 g     F .text	00000018 STM_EVAL_LEDOff
+0800195c  w    F .text	00000002 ADC_IRQHandler
+08005030 g     F .text	00000084 EXTI_Init
+08002d54 g     F .text	0000000c USB_OTG_ReadDevAllOutEp_itr
+20000424 g     O .data	00000004 CurrAudioInterface
+08004d94 g     F .text	00000020 DAC_SetChannel1Data
+0800250c g     F .text	0000000c USB_OTG_IsDeviceMode
+0800183c g     F .text	0000005e .hidden __eqsf2
+080053d8 g     F .text	0000000c RCC_PLLI2SCmd
+08001f70 g     F .text	00000028 USB_OTG_WritePacket
+08003ed4 g     F .text	00000050 DMA1_Stream7_IRQHandler
+08005188 g     F .text	0000006c I2C_DeInit
+080052d4 g     F .text	0000001a I2C_Cmd
+080032f0 g     F .text	0000003e DCD_EP_Stall
+0800195c  w    F .text	00000002 TIM7_IRQHandler
+08000188 g     F .text	000000f4 PDM_Filter_Init
+080053bc g     F .text	00000008 I2C_ClearFlag
+0800195c  w    F .text	00000002 CAN2_TX_IRQHandler
+08002d24 g     F .text	00000030 USB_OTG_EPClearStall
+080012e4 g     F .text	00000022 .hidden __aeabi_i2d
+0800195c  w    F .text	00000002 TIM5_IRQHandler
+0800195c  w    F .text	00000002 DMA2_Stream7_IRQHandler
+0800195c  w    F .text	00000002 I2C3_EV_IRQHandler
+08005744 g     O .rodata	00000010 GPIO_CLK
+0800195c  w    F .text	00000002 EXTI9_5_IRQHandler
+0800160c g     F .text	000001d0 .hidden __divdf3
+08003260 g     F .text	0000004a DCD_EP_PrepareRx
+0800195c  w    F .text	00000002 RTC_WKUP_IRQHandler
+080029d0 g     F .text	00000070 USB_OTG_EPActivate
+080013b8 g     F .text	00000254 .hidden __muldf3
+08005328 g     F .text	00000016 I2C_Send7bitAddress
+0800195c  w    F .text	00000002 ETH_WKUP_IRQHandler
+08004760 g     F .text	00000018 USBD_SetCfg
+20000358 g     O .data	0000002c AUDIO_cb
+0800195c  w    F .text	00000002 SPI2_IRQHandler
+0800183c g     F .text	0000005e .hidden __cmpsf2
+0800195c  w    F .text	00000002 OTG_HS_EP1_IN_IRQHandler
+08004f68 g     F .text	00000014 DMA_DoubleBufferModeCmd
+08001c50 g     F .text	0000000c USBD_USR_DeviceDescriptor
+08001a18 g     F .text	00000002 MemManage_Handler
+08001960 g     F .text	0000006c main
+20000104 g     O .data	00000100 T1
+08003f24 g     F .text	00000050 DMA1_Stream0_IRQHandler
+08002524 g     F .text	00000468 USB_OTG_CoreInitDev
+08001834 g     F .text	00000066 .hidden __ltsf2
+08002454 g     F .text	00000048 USB_OTG_FlushTxFifo
+08005bc4 g       *ABS*	00000000 _siccmram
+0800195c  w    F .text	00000002 CAN1_TX_IRQHandler
+08001a24 g     F .text	00000002 SVC_Handler
+0800566c g     F .text	00000014 SPI_I2S_DMACmd
+20000a60 g     O .bss	00000080 audiodata
+0800135c g     F .text	0000005a .hidden __aeabi_l2d
+20000d18 g     O .bss	00000001 AudioCtlCmd
+08004390 g     F .text	0000017c EVAL_AUDIO_Init
+08004f7c g     F .text	00000008 DMA_GetCmdStatus
+20000318 g     O .data	00000004 USBD_LangIDDesc
+08002444 g     F .text	00000010 USB_OTG_DisableGlobalInt
+0800195c  w    F .text	00000002 EXTI4_IRQHandler
+080018a4 g     F .text	00000010 .hidden __aeabi_cfcmple
+08002d7c g     F .text	00000020 USB_OTG_EP0_OutStart
+08000ed8  w    F .text	00000168 .hidden __mulsf3
+080022fc g     F .text	00000138 USB_OTG_CoreInit
+20000e4c g     O .bss	00000004 USBD_cfg_status
+08001a8c g     F .text	00000110 SystemInit
+20000e50 g     O .bss	00000004 USBD_default_cfg
+080032ac g     F .text	00000042 DCD_EP_Tx
+20000414 g     O .data	00000004 AUDIO_MAL_DMA_IRQ
+0800182c g     F .text	0000006e .hidden __gesf2
+08004f50 g     F .text	00000018 DMA_DoubleBufferModeConfig
+10000000 g       .ccmram	00000000 _eccmram
+08001d14 g     F .text	00000002 USBD_USR_DeviceDisconnected
+0800195c  w    F .text	00000002 FSMC_IRQHandler
+0800195c  w    F .text	00000002 ETH_IRQHandler
+08001c28 g     F .text	00000020 USB_OTG_BSP_EnableInterrupt
+080018b4 g     F .text	00000012 .hidden __aeabi_fcmpeq
+08000ed8  w    F .text	00000168 .hidden __aeabi_fmul
+0800195c  w    F .text	00000002 OTG_HS_EP1_OUT_IRQHandler
+080047a4 g     F .text	00000010 USBD_CtlContinueSendData
+0800189c g     F .text	00000018 .hidden __aeabi_cfrcmple
+0800195c  w    F .text	00000002 WWDG_IRQHandler
+08001c5c g     F .text	0000000c USBD_USR_LangIDStrDescriptor
+080054d4 g     F .text	00000018 RCC_APB1PeriphResetCmd
+0800298c g     F .text	0000001a USB_OTG_GetDeviceSpeed
+20000468 g     O .bss	000005f4 USB_OTG_dev
+20000b98 g     O .bss	00000080 Mic_DMA_PDM_Buffer1
+08004ff0 g     F .text	00000040 DMA_ITConfig
+0800195c  w    F .text	00000002 TIM2_IRQHandler
+08003a3c g     F .text	0000001c STM_EVAL_LEDToggle
+08001a44 g     F .text	0000003c OTG_FS_WKUP_IRQHandler
+0800195c  w    F .text	00000002 TIM1_TRG_COM_TIM11_IRQHandler
+0800195c  w    F .text	00000002 OTG_HS_IRQHandler
+08004c64 g     F .text	00000052 USBD_GetString
+080018c8 g     F .text	00000012 .hidden __aeabi_fcmplt
+2001ffff g       *ABS*	00000000 _estack
+0800195c  w    F .text	00000002 EXTI1_IRQHandler
+20000468 g       .data	00000000 _edata
+10000000 g       .ccmram	00000000 _sccmram
+08004d6c g     F .text	00000028 DAC_Cmd
+08004d3c g     F .text	00000030 DAC_Init
+0800195c  w    F .text	00000002 USART2_IRQHandler
+08001cd4 g     F .text	0000001c USBD_USR_ConfigStrDescriptor
+080056ac g     F .text	0000002c SYSCFG_EXTILineConfig
+08000000 g     O .isr_vector	00000000 g_pfnVectors
+08004788 g     F .text	0000001a USBD_CtlSendData
+080017dc g     F .text	0000004e .hidden __aeabi_d2iz
+08005680 g     F .text	00000020 SPI_I2S_ITConfig
+080018a4 g     F .text	00000010 .hidden __aeabi_cfcmpeq
+0800195c  w    F .text	00000002 I2C2_ER_IRQHandler
+080029a8 g     F .text	00000026 USB_OTG_EP0Activate
+080042d0 g     F .text	000000c0 SET_I2S_PLL
+08001f98 g     F .text	0000002c USB_OTG_ReadPacket
+0800195c  w    F .text	00000002 DMA2_Stream1_IRQHandler
+0800056a g     F .text	000002ee PDM_Filter_80_LSB
+08004fbc g     F .text	00000034 DMA_ClearFlag
+20000410 g     O .data	00000004 AUDIO_MAL_DMA_FLAG_TC
+0800195c  w    F .text	00000002 CAN1_SCE_IRQHandler
+0800338c g     F .text	00000010 DCD_EP_SetAddress
+0800195c  w    F .text	00000002 FLASH_IRQHandler
+08002d9c g     F .text	00000020 USB_OTG_UngateClock
+20000d84 g     O .bss	000000c8 USBD_StrDesc
+20000d38 g     O .bss	0000003c DMA_InitStructure
+0800195c  w    F .text	00000002 DMA2_Stream4_IRQHandler
+08005474 g     F .text	00000018 RCC_AHB1PeriphClockCmd
+08001a1c g     F .text	00000002 BusFault_Handler
+0800195c  w    F .text	00000002 USART1_IRQHandler
+080019cc g     F .text	00000044 EVAL_AUDIO_TransferComplete_CallBack
+08001f44 g     F .text	0000002c simple_rec_start
+08005340 g     F .text	0000001a I2C_AcknowledgeConfig
+08001a80 g     F .text	0000000c OTG_FS_IRQHandler
+08003f74 g     F .text	000000d4 SPI3_IRQHandler
+0800195c  w    F .text	00000002 DMA1_Stream4_IRQHandler
+08005368 g     F .text	0000001a I2C_CheckEvent
+080054ec g     F .text	00000018 RCC_APB2PeriphResetCmd
+0800530c g     F .text	0000001a I2C_GenerateSTOP
+20000420 g     O .data	00000004 CODECTimeout
+0800195c  w    F .text	00000002 I2C1_ER_IRQHandler
+08003a0c g     F .text	00000018 STM_EVAL_LEDOn
+08004cb8 g     F .text	00000014 NVIC_PriorityGroupConfig
+08001308 g     F .text	00000042 .hidden __aeabi_f2d
+08004db4 g     F .text	0000012c DMA_DeInit
+20000d76 g     O .bss	00000002 dac_play_cnt
+2000031c g     O .data	0000001c USR_desc
+08001048 g     F .text	0000027a .hidden __subdf3
+08002a40 g     F .text	0000003a USB_OTG_EPDeactivate
+0800195c  w    F .text	00000002 DMA2_Stream6_IRQHandler
+20000428 g     O .data	0000002c USBD_DCD_INT_cb
+2000041c g     O .data	00000004 AudioTotalSize
+20000c98 g     O .bss	00000020 RecBuf0
+08005570 g     F .text	000000dc I2S_Init
+08001eac g     F .text	00000098 DMA1_Stream3_IRQHandler
+08002434 g     F .text	00000010 USB_OTG_EnableGlobalInt
+
+
