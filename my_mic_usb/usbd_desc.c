@@ -55,7 +55,7 @@
   */ 
 
 
-#define USBD_VID                        0x0483
+#define USBD_VID                        0x0482
 
 #ifdef STM32F2XX
  #define USBD_PID                       0x5730
@@ -69,7 +69,7 @@
 #define USBD_LANGID_STRING              0x409
 #define USBD_MANUFACTURER_STRING        "TE NPI"
 
-#define USBD_PRODUCT_FS_STRING          "TE NPI"
+#define USBD_PRODUCT_FS_STRING          "TE NPI 124"
 #define USBD_PRODUCT_HS_STRING          "STM32 AUDIO Streaming in HS Mode"
 #define USBD_SERIALNUMBER_FS_STRING     "00000000034E"
 #define USBD_SERIALNUMBER_HS_STRING     "00000000034F"
