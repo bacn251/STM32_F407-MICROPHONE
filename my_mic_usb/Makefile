@@ -26,7 +26,7 @@ RM = rm -f
 #=============================================================================#
 
 # project name
-PROJECT = stm32f4_usb_to_audio
+PROJECT = fit_audio
 
 # core type
 CORE = cortex-m4

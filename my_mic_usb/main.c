@@ -52,7 +52,7 @@ int main(void)
   
   simple_rec_start();//initialise MIC and start capture data from MIC
   
-  EVAL_AUDIO_Play((uint16_t*)(&audiodata[0]),MIC_FILTER_RESULT_LENGTH*2*2);//play data to speaker (optional)
+  //EVAL_AUDIO_Play((uint16_t*)(&audiodata[0]),MIC_FILTER_RESULT_LENGTH*2*2);//play data to speaker (optional)
   
   while(1)
   {

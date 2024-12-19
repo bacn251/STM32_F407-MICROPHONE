@@ -350,19 +350,19 @@ uint32_t EVAL_AUDIO_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFr
   /* Perform low layer Codec initialization */
   SET_I2S_PLL(AudioFreq);//configures I2S PLL module
   
-  if (Codec_Init(OutputDevice, VOLUME_CONVERT(Volume), AudioFreq) != 0)
-  {
-    return 1;                
-  }
-  else
-  {    
-    /* I2S data transfer preparation:
-    Prepare the Media to be used for the audio transfer from memory to I2S peripheral */
-    Audio_MAL_Init();
+  // if (Codec_Init(OutputDevice, VOLUME_CONVERT(Volume), AudioFreq) != 0)
+  // {
+  //   return 1;                
+  // }
+  // else
+  // {    
+  //   /* I2S data transfer preparation:
+  //   Prepare the Media to be used for the audio transfer from memory to I2S peripheral */
+  //   Audio_MAL_Init();
     
-    /* Return 0 when all operations are OK */
-    return 0;
-  }
+  //   /* Return 0 when all operations are OK */
+  //   return 0;
+  // }
 }
 
 /**
@@ -402,10 +402,10 @@ uint32_t EVAL_AUDIO_Play(uint16_t* pBuffer, uint32_t Size)
   Audio_MAL_Play((uint32_t)pBuffer, (uint32_t)(DMA_MAX(AudioTotalSize / 2)));
   
   /* Update the remaining number of data to be played */
-  AudioRemSize = (Size/2) - DMA_MAX(AudioTotalSize);//считается в 16-bit
+  AudioRemSize = (Size/2) - DMA_MAX(AudioTotalSize);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ 16-bit
   
   /* Update the current audio pointer position */
-  CurrentPos = pBuffer + DMA_MAX(AudioTotalSize);//считается в 16-bit
+  CurrentPos = pBuffer + DMA_MAX(AudioTotalSize);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ 16-bit
   
   return 0;
 }
@@ -624,7 +624,7 @@ void Audio_MAL_DAC_IRQHandler(void)
   * @brief  I2S interrupt management
   * @param  None
   * @retval None
-  * Эта функция вызывается с удвоенной частотой семплирования (48кгц -> 96 кгц)
+  * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (48пїЅпїЅпїЅ -> 96 пїЅпїЅпїЅ)
   */
 void Audio_I2S_IRQHandler(void)
 {
@@ -1561,7 +1561,7 @@ void Audio_MAL_Play(uint32_t Addr, uint32_t Size)
 { 
   //STM_EVAL_LEDToggle(LED6);
   //STM_EVAL_LEDOn(LED6);
-  DMA_ClearFlag(AUDIO_MAL_DMA_STREAM, AUDIO_MAL_DMA_FLAG_TC);//при отключенных прерываниях dma без этого ошибка
+  DMA_ClearFlag(AUDIO_MAL_DMA_STREAM, AUDIO_MAL_DMA_FLAG_TC);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dma пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
   //Audio_MAL_Stop();
   
 //I2S_Cmd(CODEC_I2S, DISABLE);
@@ -1572,7 +1572,7 @@ void Audio_MAL_Play(uint32_t Addr, uint32_t Size)
     
     if ((CODEC_I2S->I2SCFGR & I2S_ENABLE_MASK) != 0)
     {
-      //для выбора правильного канала
+      //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
       while (SPI_I2S_GetFlagStatus(CODEC_I2S,I2S_FLAG_CHSIDE) != SET) {}
     }
     dac_play_cnt = 0;
@@ -1705,7 +1705,7 @@ void DAC_Config(void)
   DAC_InitStructure.DAC_Trigger = DAC_Trigger_None;
   DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
   //DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
-  DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Disable;//звук тише
+  DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Disable;//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
   DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = 0;
   DAC_Init(AUDIO_DAC_CHANNEL, &DAC_InitStructure);
 
@@ -1718,7 +1718,7 @@ void DAC_Config(void)
   * @brief  Get next data sample callback
   * @param  None
   * @retval Next data sample to be sent
-  * Эта функция вызывается с удвоенной частотой семплирования (48кгц -> 96 кгц)
+  * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (48пїЅпїЅпїЅ -> 96 пїЅпїЅпїЅ)
   */
 uint16_t EVAL_AUDIO_GetSampleCallBack(void)
 {
@@ -1737,7 +1737,7 @@ uint16_t EVAL_AUDIO_GetSampleCallBack(void)
     
         if ((dac_play_cnt & 1) == 0)
         {
-          dac_play_ptr++; //перепрыкиваем через 2, поскольку воспроизводим только левый канал
+          dac_play_ptr++; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 2, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
           dac_play_ptr++;
         }
     
