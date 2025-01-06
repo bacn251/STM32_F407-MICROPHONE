@@ -1,8 +1,8 @@
 #=============================================================================#
 # ARM makefile
 #
-# author: Freddie Chopin, http://www.freddiechopin.info/
-# last change: 2012-03-22
+# 
+# 
 #
 # this makefile is based strongly on many examples found in the network
 #=============================================================================#
@@ -206,80 +206,72 @@ $(ELF) : $(LD_SCRIPT)
 #-----------------------------------------------------------------------------#
 
 $(ELF) : $(OBJS)
-	@echo 'Linking target: $(ELF)'
+	$(info Linking target: $(ELF))  # Display the linking message
 	$(CXX) $(LD_FLAGS_F) $(OBJS) $(LIBS) -o $@
-	@echo ' '
-
+	$(info )  # Replace echo with $(info) to print an empty line
 #-----------------------------------------------------------------------------#
 # compiling - C++ source -> objects
 #-----------------------------------------------------------------------------#
 
 $(OUT_DIR_F)%.o : %.$(CXX_EXT)
-	@echo 'Compiling file: $<'
+	$(info Compiling file: $<)
 	$(CXX) -c $(CXX_FLAGS_F) $< -o $@
-	@echo ' '
 
 #-----------------------------------------------------------------------------#
 # compiling - C source -> objects
 #-----------------------------------------------------------------------------#
 
 $(OUT_DIR_F)%.o : %.$(C_EXT)
-	@echo 'Compiling file: $<'
+	$(info Compiling file: $<)
 	$(CC) -c $(C_FLAGS_F) $< -o $@
-	@echo ' '
 
 #-----------------------------------------------------------------------------#
 # assembling - ASM source -> objects
 #-----------------------------------------------------------------------------#
 
 $(OUT_DIR_F)%.o : %.$(AS_EXT)
-	@echo 'Assembling file: $<'
+	$(info Assembling file: $<)
 	$(AS) -c $(AS_FLAGS_F) $< -o $@
-	@echo ' '
 
 #-----------------------------------------------------------------------------#
 # memory images - elf -> hex, elf -> bin
 #-----------------------------------------------------------------------------#
 
 $(HEX) : $(ELF)
-	@echo 'Creating IHEX image: $(HEX)'
+	$(info Creating IHEX image: $(HEX))  # Replaces @echo with $(info)
 	$(OBJCOPY) -O ihex $< $@
-	@echo ' '
 
 $(BIN) : $(ELF)
-	@echo 'Creating binary image: $(BIN)'
+	$(info Creating binary image: $(BIN))  # Replaces @echo with $(info)
 	$(OBJCOPY) -O binary $< $@
-	@echo ' '
 
 #-----------------------------------------------------------------------------#
 # memory dump - elf -> dmp
 #-----------------------------------------------------------------------------#
 
 $(DMP) : $(ELF)
-	@echo 'Creating memory dump: $(DMP)'
+	$(info Creating memory dump: $(DMP))  # Replaces @echo with $(info)
 	$(OBJDUMP) -x --syms $< > $@
-	@echo ' '
 
 #-----------------------------------------------------------------------------#
 # extended listing - elf -> lss
 #-----------------------------------------------------------------------------#
 
 $(LSS) : $(ELF)
-	@echo 'Creating extended listing: $(LSS)'
+	$(info Creating extended listing: $(LSS))  # Replaces @echo with $(info)
 	$(OBJDUMP) -S $< > $@
-	@echo ' '
+	$(info )  # Replaces @echo ' ' with $(info)
 
 #-----------------------------------------------------------------------------#
 # print the size of the objects and the .elf file
 #-----------------------------------------------------------------------------#
 
 print_size :
-	@echo 'Size of modules:'
+	$(info Size of modules:)  # Replaces @echo with $(info)
 	$(SIZE) -B -t --common $(OBJS) $(USER_OBJS)
-	@echo ' '
-	@echo 'Size of target .elf file:'
+	$(info)  # Replaces @echo ' ' with $(info)
+	$(info Size of target .elf file:)  # Replaces @echo with $(info)
 	$(SIZE) -B $(ELF)
-	@echo ' '
 
 #-----------------------------------------------------------------------------#
 # create the desired output directory
@@ -294,14 +286,14 @@ make_output_dir :
 
 clean:
 ifeq ($(strip $(OUT_DIR_F)), )
-	@echo 'Removing all generated output files'
+	$(info Removing all generated output files)
 else
-	@echo 'Removing all generated output files from output directory: $(OUT_DIR_F)'
+	$(info Removing all generated output files from output directory: $(OUT_DIR_F))
 endif
 ifneq ($(strip $(GENERATED)), )
 	$(RM) $(GENERATED)
 else
-	@echo 'Nothing to remove...'
+	$(info Nothing to remove...)
 endif
 
 #=============================================================================#
