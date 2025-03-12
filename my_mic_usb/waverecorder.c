@@ -17,8 +17,8 @@
 static uint32_t AudioRecInited = 0;
 PDMFilter_InitStruct Filter;
 
-int16_t RecBuf0[MIC_FILTER_RESULT_LENGTH]; //buffer for filtered PCM data from MIC
-int16_t RecBuf1[MIC_FILTER_RESULT_LENGTH]; //buffer for filtered PCM data from MIC
+int32_t RecBuf0[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
+int32_t RecBuf1[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
 uint8_t buffer_ready = 1;//number of buffer with fitered PCM data
 
 volatile uint16_t Mic_DMA_PDM_Buffer0[INTERNAL_BUFF_SIZE];//buffer for RAW MIC data (filled by DMA)
@@ -33,8 +33,8 @@ void DMA1_Stream3_IRQHandler(void)
 {
   static uint16_t Mic_PDM_Buffer[INTERNAL_BUFF_SIZE];//tmp buffer for HTONS
   uint8_t i;
-  uint16_t* write_buf;//pointer for RAW data which must be filtered
-  uint16_t* decode_buf;//pointer for filtered PCM data
+  uint32_t* write_buf; // pointer for RAW data which must be filtered
+  int32_t* decode_buf; // pointer for filtered PCM data
   u16 MicGain = 30;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< GAIN
   uint8_t tmp_buf_number;
   
@@ -45,22 +45,20 @@ void DMA1_Stream3_IRQHandler(void)
     
     if ((DMA1_Stream3->CR & DMA_SxCR_CT) == 0)//get number of current buffer
     {
-      write_buf = (uint16_t*)Mic_DMA_PDM_Buffer1;
-      decode_buf = (uint16_t*)RecBuf1;
+      write_buf = (uint32_t*)Mic_DMA_PDM_Buffer1;
+      decode_buf = (int32_t*)RecBuf1;
       tmp_buf_number = 1;
     }
     else
     {
-      write_buf = (uint16_t*)Mic_DMA_PDM_Buffer0;
-      decode_buf = (uint16_t*)RecBuf0;
+      write_buf = (uint32_t*)Mic_DMA_PDM_Buffer0;
+      decode_buf = (int32_t*)RecBuf0;
       tmp_buf_number = 0;
     }
-    for (i=0;i<INTERNAL_BUFF_SIZE;i++){Mic_PDM_Buffer[i] = HTONS(write_buf[i]);}//swap bytes for filter
+    for (i = 0; i < INTERNAL_BUFF_SIZE; i++) { Mic_PDM_Buffer[i] = HTONS(write_buf[i]); } // swap bytes for filter
     
-    PDM_Filter_64_LSB((uint8_t *)Mic_PDM_Buffer, decode_buf, MicGain , (PDMFilter_InitStruct *)&Filter);//filter RAW data
+    PDM_Filter_64_LSB((uint8_t *)Mic_PDM_Buffer, (int16_t*)decode_buf, MicGain , (PDMFilter_InitStruct *)&Filter); // filter RAW data
 
-    //for(i=0;i<MIC_FILTER_RESULT_LENGTH;i++)decode_buf[i]=255;
-    
     buffer_ready = tmp_buf_number;
   }
   STM_EVAL_LEDOff(LED3);
@@ -72,7 +70,7 @@ void DMA1_Stream3_IRQHandler(void)
 
 void simple_rec_start(void)
 {
-  WaveRecorderInit(64000, 16, 1);//64k = 16k*4 //4 = 64word / 16word
+  WaveRecorderInit(48000, 24, 1); // 48kHz, 24-bit, 1 channel
   WaveRecorderStart(NULL, MIC_FILTER_RESULT_LENGTH);
 }
 
@@ -97,10 +95,10 @@ uint32_t WaveRecorderInit(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
     RCC->AHB1ENR |= RCC_AHB1ENR_CRCEN;
     
     /* Filter LP & HP Init */
-    Filter.LP_HZ = 8000.0;
+    Filter.LP_HZ = 24000.0;
     Filter.HP_HZ = 200.0;
 
-    Filter.Fs = 16000;
+    Filter.Fs = 48000;
     Filter.Out_MicChannels = 1;
     Filter.In_MicChannels = 1;
     
@@ -228,20 +226,20 @@ static void WaveRecorder_SPI_Init(uint32_t Freq)
   I2S_InitTypeDef I2S_InitStructure;
 
   /* Enable the SPI clock */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2,ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
   
   /* SPI configuration */
   SPI_I2S_DeInit(SPI2);
-  I2S_InitStructure.I2S_AudioFreq = Freq/2;//i2s two channel mode
+  I2S_InitStructure.I2S_AudioFreq = Freq; // set the correct audio frequency
   I2S_InitStructure.I2S_Standard = I2S_Standard_LSB;
-  I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_16b;
+  I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_24b;
   I2S_InitStructure.I2S_CPOL = I2S_CPOL_High;
   I2S_InitStructure.I2S_Mode = I2S_Mode_MasterRx;
-  I2S_InitStructure.I2S_MCLKOutput = I2S_MCLKOutput_Disable;
+  I2S_InitStructure.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
   /* Initialize the I2S peripheral with the structure above */
   I2S_Init(SPI2, &I2S_InitStructure);
 
-  SPI_I2S_DMACmd(SPI2, SPI_I2S_DMAReq_Rx, ENABLE);//enable DMA
+  SPI_I2S_DMACmd(SPI2, SPI_I2S_DMAReq_Rx, ENABLE); // enable DMA
 }
 
 

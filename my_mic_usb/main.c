@@ -19,8 +19,8 @@ __IO uint32_t TimingDelay;
 
 int16_t audiodata[64];//this data is playing by speaker
 
-extern uint16_t RecBuf0[MIC_FILTER_RESULT_LENGTH]; //buffer for filtered PCM data from MIC
-extern uint16_t RecBuf1[MIC_FILTER_RESULT_LENGTH]; //buffer for filtered PCM data from MIC
+extern int32_t RecBuf0[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
+extern int32_t RecBuf1[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
 extern uint8_t buffer_ready;
 
 void init_audio_dac(void);
@@ -41,7 +41,7 @@ int main(void)
   
   RCC_GetClocksFreq(&RCC_Clocks);//test
   
-  EVAL_AUDIO_Init(OUTPUT_DEVICE_HEADPHONE, 86, I2S_AudioFreq_16k);//init speaker (optional)
+  EVAL_AUDIO_Init(OUTPUT_DEVICE_HEADPHONE, 86, I2S_AudioFreq_48k); // init speaker with 48kHz (optional)
   
   USBD_Init(&USB_OTG_dev,      
             USB_OTG_FS_CORE_ID,
