@@ -56,29 +56,23 @@
 
 
 #define USBD_VID                        0x0482
-
-#ifdef STM32F2XX
- #define USBD_PID                       0x5730
-#else
- #define USBD_PID                       0x5730
-#endif /* STM32F2XX */
+#define USBD_PID                       0x5730
 
 /** @defgroup USB_String_Descriptors
   * @{
   */ 
 #define USBD_LANGID_STRING              0x409
-#define USBD_MANUFACTURER_STRING        "TE NPI"
-
-#define USBD_PRODUCT_FS_STRING          "TE NPI 124"
-#define USBD_PRODUCT_HS_STRING          "STM32 AUDIO Streaming in HS Mode"
+#define USBD_MANUFACTURER_STRING        "STMicroelectronics"
+#define USBD_PRODUCT_FS_STRING          "STM32 24-bit Audio"
+#define USBD_PRODUCT_HS_STRING          "STM32 24-bit Audio"
 #define USBD_SERIALNUMBER_FS_STRING     "00000000034E"
 #define USBD_SERIALNUMBER_HS_STRING     "00000000034F"
 
-#define USBD_CONFIGURATION_FS_STRING    "AUDIO Config"
-#define USBD_INTERFACE_FS_STRING        "AUDIO Interface"
+#define USBD_CONFIGURATION_FS_STRING    "24-bit Audio Config"
+#define USBD_INTERFACE_FS_STRING        "24-bit Audio Interface"
 
-#define USBD_CONFIGURATION_HS_STRING    "AUDIO Config"
-#define USBD_INTERFACE_HS_STRING        "AUDIO Interface"
+#define USBD_CONFIGURATION_HS_STRING    "24-bit Audio Config"
+#define USBD_INTERFACE_HS_STRING        "24-bit Audio Interface"
 
 /**
   * @}

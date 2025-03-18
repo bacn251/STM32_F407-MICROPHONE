@@ -17,7 +17,8 @@ __IO uint8_t UserButtonPressed = 0;
 
 __IO uint32_t TimingDelay;
 
-int16_t audiodata[64];//this data is playing by speaker
+/* Buffer for 24-bit audio data */
+// int32_t audiodata[FRAME_SIZE/4];  // Buffer for 24-bit audio data (3 bytes per sample)
 
 extern int32_t RecBuf0[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
 extern int32_t RecBuf1[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
@@ -27,7 +28,6 @@ void init_audio_dac(void);
 
 int main(void)
 {
-  
   RCC_ClocksTypeDef RCC_Clocks;
   
   /* Initialize LEDs and User_Button on STM32F4-Discovery --------------------*/
@@ -38,10 +38,10 @@ int main(void)
   STM_EVAL_LEDInit(LED5);
   STM_EVAL_LEDInit(LED6);
   
+  RCC_GetClocksFreq(&RCC_Clocks);
   
-  RCC_GetClocksFreq(&RCC_Clocks);//test
-  
-  EVAL_AUDIO_Init(OUTPUT_DEVICE_HEADPHONE, 86, I2S_AudioFreq_48k); // init speaker with 48kHz (optional)
+  /* Initialize audio with 24-bit resolution and 48kHz sampling rate */
+  EVAL_AUDIO_Init(OUTPUT_DEVICE_HEADPHONE, 86, I2S_AudioFreq_48k);
   
   USBD_Init(&USB_OTG_dev,      
             USB_OTG_FS_CORE_ID,
@@ -49,10 +49,9 @@ int main(void)
             &AUDIO_cb, 
             &USR_cb);
   
-  
-  simple_rec_start();//initialise MIC and start capture data from MIC
-  
-  //EVAL_AUDIO_Play((uint16_t*)(&audiodata[0]),MIC_FILTER_RESULT_LENGTH*2*2);//play data to speaker (optional)
+  /* Initialize and start microphone recording with 24-bit resolution */
+  WaveRecorderInit(I2S_AudioFreq_48k, AUDIO_BIT_RESOLUTION, 1);
+  simple_rec_start();
   
   while(1)
   {

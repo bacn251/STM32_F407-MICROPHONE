@@ -45,9 +45,9 @@
   * @{
   */ 
 
-/* AudioFreq * DataSize (2 bytes) * NumChannels (Stereo: 2) */
-#define AUDIO_OUT_PACKET                              (uint32_t)(((USBD_AUDIO_FREQ * 2 * 2) /1000)) 
-#define AUDIO_IN_PACKET                               (uint32_t)(((USBD_IN_AUDIO_FREQ * 2 * 1) /1000)) //16000 -> 32
+/* AudioFreq * DataSize (3 bytes for 24-bit) * NumChannels (Mono: 1) */
+#define AUDIO_OUT_PACKET                              (uint32_t)(((USBD_AUDIO_FREQ * 3 * 2) /1000)) 
+#define AUDIO_IN_PACKET                               (uint32_t)(((USBD_IN_AUDIO_FREQ * 3 * 1) /1000)) // 48kHz * 3 bytes * 1 channel = 144 bytes
 
 
 #define AUDIO_CONFIG_DESC_SIZE                        109

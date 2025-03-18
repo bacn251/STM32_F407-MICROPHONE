@@ -328,11 +328,11 @@ static uint8_t usbd_audio_DataIn(void *pdev, uint8_t epnum)
 
   if (buffer_ready == 1)
   {
-    DCD_EP_Tx(pdev, AUDIO_IN_EP, (uint8_t *)(RecBuf1), AUDIO_IN_PACKET * 3 / 2); // length in words to bytes
+    DCD_EP_Tx(pdev, AUDIO_IN_EP, (uint8_t *)(RecBuf1), AUDIO_IN_PACKET); // Send 24-bit data (3 bytes per sample)
   }
   else
   {
-    DCD_EP_Tx(pdev, AUDIO_IN_EP, (uint8_t *)(RecBuf0), AUDIO_IN_PACKET * 3 / 2); // length in words to bytes
+    DCD_EP_Tx(pdev, AUDIO_IN_EP, (uint8_t *)(RecBuf0), AUDIO_IN_PACKET); // Send 24-bit data (3 bytes per sample)
   }
 
   STM_EVAL_LEDToggle(LED6);

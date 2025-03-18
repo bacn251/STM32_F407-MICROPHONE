@@ -1,5 +1,3 @@
-
-
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USBD_CONF__H__
 #define __USBD_CONF__H__
@@ -7,18 +5,19 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4_discovery.h"
 
-#define USBD_IN_AUDIO_FREQ                (uint16_t)(16000) //MIC frequency in Hz.
+#define USBD_IN_AUDIO_FREQ                (uint16_t)(48000) // MIC frequency in Hz - Updated to 48kHz
+#define AUDIO_BIT_RESOLUTION              24  // 24-bit audio resolution
 
 /* Audio frequency in Hz */
 #ifndef EXTERNAL_CRYSTAL_25MHz
- #define USBD_AUDIO_FREQ                (uint16_t)(16000) /* Audio frequency in Hz.
+ #define USBD_AUDIO_FREQ                (uint16_t)(48000) /* Audio frequency in Hz - Updated to 48kHz
                                                  It is advised to set standard frequencies >= 24KHz to get best quality
                                                  except for STM32F10 devices, when the HSE value is 25MHz, it is advised to
                                                  set audio frequencies reachable with this HSE value (refer to RM0008 for
                                                  more details). ie. it is advised to set 16KHz value in this case. 
                                                  Note that maximum allowed audio frequency is 96KHz (this limitation is 
                                                  due to the codec used on the Evaluation board. The STM32 I2S cell allows
-                                                 to  reach 192KHz frequency).
+                                                 to reach 192KHz frequency).
                                                  @note
                                                     When modifying this value, make sure that the I2S PLL configuration allows
                                                     to get minimum error on audio frequency. This configuration is set in file

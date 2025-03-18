@@ -12,6 +12,13 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
+// Function to convert 32-bit value from host to network byte order
+static uint32_t HTONL(uint32_t hostlong) {
+    return ((hostlong & 0xFF000000) >> 24) |
+           ((hostlong & 0x00FF0000) >> 8) |
+           ((hostlong & 0x0000FF00) << 8) |
+           ((hostlong & 0x000000FF) << 24);
+}
 
 /* Current state of the audio recorder interface intialization */
 static uint32_t AudioRecInited = 0;
@@ -21,8 +28,8 @@ int32_t RecBuf0[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from 
 int32_t RecBuf1[MIC_FILTER_RESULT_LENGTH]; // buffer for filtered PCM data from MIC
 uint8_t buffer_ready = 1;//number of buffer with fitered PCM data
 
-volatile uint16_t Mic_DMA_PDM_Buffer0[INTERNAL_BUFF_SIZE];//buffer for RAW MIC data (filled by DMA)
-volatile uint16_t Mic_DMA_PDM_Buffer1[INTERNAL_BUFF_SIZE];//buffer for RAW MIC data (filled by DMA)
+volatile uint32_t Mic_DMA_PDM_Buffer0[INTERNAL_BUFF_SIZE];//buffer for RAW MIC data (filled by DMA)
+volatile uint32_t Mic_DMA_PDM_Buffer1[INTERNAL_BUFF_SIZE];//buffer for RAW MIC data (filled by DMA)
 
 
 /* Private function prototypes -----------------------------------------------*/
@@ -31,11 +38,11 @@ volatile uint16_t Mic_DMA_PDM_Buffer1[INTERNAL_BUFF_SIZE];//buffer for RAW MIC d
 
 void DMA1_Stream3_IRQHandler(void)
 {
-  static uint16_t Mic_PDM_Buffer[INTERNAL_BUFF_SIZE];//tmp buffer for HTONS
+  static uint32_t Mic_PDM_Buffer[INTERNAL_BUFF_SIZE];
   uint8_t i;
-  uint32_t* write_buf; // pointer for RAW data which must be filtered
-  int32_t* decode_buf; // pointer for filtered PCM data
-  u16 MicGain = 30;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< GAIN
+  uint32_t* write_buf;
+  int32_t* decode_buf;
+  u16 MicGain = 30;
   uint8_t tmp_buf_number;
   
   STM_EVAL_LEDOn(LED3);
@@ -43,7 +50,7 @@ void DMA1_Stream3_IRQHandler(void)
   {
     DMA_ClearFlag(DMA1_Stream3, DMA_FLAG_TCIF3);
     
-    if ((DMA1_Stream3->CR & DMA_SxCR_CT) == 0)//get number of current buffer
+    if ((DMA1_Stream3->CR & DMA_SxCR_CT) == 0)
     {
       write_buf = (uint32_t*)Mic_DMA_PDM_Buffer1;
       decode_buf = (int32_t*)RecBuf1;
@@ -55,9 +62,14 @@ void DMA1_Stream3_IRQHandler(void)
       decode_buf = (int32_t*)RecBuf0;
       tmp_buf_number = 0;
     }
-    for (i = 0; i < INTERNAL_BUFF_SIZE; i++) { Mic_PDM_Buffer[i] = HTONS(write_buf[i]); } // swap bytes for filter
-    
-    PDM_Filter_64_LSB((uint8_t *)Mic_PDM_Buffer, (int16_t*)decode_buf, MicGain , (PDMFilter_InitStruct *)&Filter); // filter RAW data
+
+    // Process PDM data to 24-bit PCM
+    for (i = 0; i < INTERNAL_BUFF_SIZE; i++) {
+        // Convert PDM to PCM using PDM filter
+        PDM_Filter_64_LSB((uint8_t *)&write_buf[i], (int16_t*)&decode_buf[i], MicGain, (PDMFilter_InitStruct *)&Filter);
+        // Scale up to 24-bit
+        decode_buf[i] = ((int32_t)decode_buf[i]) << 8;
+    }
 
     buffer_ready = tmp_buf_number;
   }
@@ -158,9 +170,9 @@ static void WaveRecorder_DMA_Init(void)
   DMA_InitStructure.DMA_BufferSize = (uint32_t)INTERNAL_BUFF_SIZE;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;//16bit
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;//<<<<<<<<<<<<
+  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;//32bit
+  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;//32bit
+  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
   DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
@@ -232,7 +244,7 @@ static void WaveRecorder_SPI_Init(uint32_t Freq)
   SPI_I2S_DeInit(SPI2);
   I2S_InitStructure.I2S_AudioFreq = Freq; // set the correct audio frequency
   I2S_InitStructure.I2S_Standard = I2S_Standard_LSB;
-  I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_24b;
+  I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_24b; // Set to 24-bit format
   I2S_InitStructure.I2S_CPOL = I2S_CPOL_High;
   I2S_InitStructure.I2S_Mode = I2S_Mode_MasterRx;
   I2S_InitStructure.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
